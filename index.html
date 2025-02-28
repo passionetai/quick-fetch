@@ -65,7 +65,7 @@
 
         input[type="text"] {
             width: 100%;
-            max-width: 400px;
+            max-width: 100%; /* Ensure it doesn't overflow */
             padding: 12px;
             margin-bottom: 20px;
             border: 2px solid var(--border-color);
@@ -76,6 +76,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
         }
 
         input[type="text"]:focus {
@@ -194,6 +195,18 @@
 
             [data-theme="dark"] .subtitle {
                 color: #aaa; /* Lighter subtitle text for dark mode */
+            }
+
+            /* Ensure input field fits within the container */
+            .container {
+                padding: 15px; /* Reduce padding for smaller screens */
+            }
+
+            input[type="text"] {
+                width: calc(100% - 24px); /* Adjust width to account for padding */
+                max-width: 100%; /* Ensure it doesn't overflow */
+                margin-left: auto;
+                margin-right: auto;
             }
         }
     </style>
