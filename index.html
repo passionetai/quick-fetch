@@ -74,6 +74,14 @@
             margin-bottom: 20px;
         }
 
+        .description {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
         input[type="text"] {
             width: 100%;
             max-width: 100%; /* Ensure it doesn't overflow */
@@ -208,6 +216,10 @@
                 color: #aaa; /* Lighter subtitle text for dark mode */
             }
 
+            [data-theme="dark"] .description {
+                color: #f1f1f1; /* Light text for description in dark mode */
+            }
+
             /* Ensure input field fits within the container */
             .container {
                 padding: 15px; /* Reduce padding for smaller screens */
@@ -231,6 +243,26 @@
             Quick Fetch
         </h1>
         <div class="subtitle">Free YouTube Thumbnail Downloader</div>
+
+        <!-- Description -->
+        <div class="description">
+            <p>
+                Welcome to <strong>Quick Fetch</strong>, your go-to tool for downloading YouTube thumbnails in high quality. 
+                Simply paste the YouTube video URL into the input field below, and we'll fetch the available thumbnails for you.
+            </p>
+            <p>
+                You can download thumbnails in the following resolutions:
+            </p>
+            <ul>
+                <li><strong>Default</strong>: 120x90 pixels</li>
+                <li><strong>Medium</strong>: 320x180 pixels</li>
+                <li><strong>High</strong>: 480x360 pixels</li>
+                <li><strong>Max Resolution</strong>: 1280x720 pixels (if available)</li>
+            </ul>
+            <p>
+                Click on any thumbnail to preview it, and use the <strong>Download Thumbnail</strong> button to save it to your device.
+            </p>
+        </div>
 
         <!-- Thumbnail Display Area -->
         <div class="thumbnail-display" id="thumbnailDisplay">
@@ -315,7 +347,8 @@
                 const thumbnails = {
                     default: `https://img.youtube.com/vi/${videoId}/default.jpg`,
                     medium: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
-                    high: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+                    high: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+                    maxres: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
                 };
 
                 // Display medium thumbnail by default
