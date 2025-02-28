@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         /* Base Styles */
         :root {
@@ -366,7 +368,10 @@
 
                 // Show download button
                 downloadButton.style.display = 'block';
-                downloadButton.onclick = () => downloadImage(thumbnails.medium, `thumbnail_medium.jpg`);
+                downloadButton.onclick = () => {
+                    downloadImage(thumbnails.medium, `thumbnail_medium.jpg`);
+                    triggerConfetti(); // Trigger confetti effect
+                };
             } catch (error) {
                 error.textContent = 'Error fetching thumbnail: ' + error.message;
             } finally {
@@ -383,7 +388,10 @@
             thumbnailDisplay.innerHTML = `<img src="${url}" alt="YouTube Thumbnail">`;
 
             // Update download button to download the current thumbnail
-            downloadButton.onclick = () => downloadImage(url, `thumbnail_${url.split('/').pop()}`);
+            downloadButton.onclick = () => {
+                downloadImage(url, `thumbnail_${url.split('/').pop()}`);
+                triggerConfetti(); // Trigger confetti effect
+            };
         }
 
         // Extract Video ID from URL
@@ -402,6 +410,15 @@
             document.body.appendChild(link);
             link.click(); // Trigger the download
             document.body.removeChild(link); // Clean up
+        }
+
+        // Confetti Effect Function
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100, // Number of confetti particles
+                spread: 70, // Spread of the confetti
+                origin: { y: 0.6 } // Origin of the confetti (bottom of the screen)
+            });
         }
     </script>
 </body>
