@@ -177,26 +177,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: transform 0.5s ease-in-out; /* Smooth rotation */
             box-shadow: var(--shadow);
         }
 
         .theme-toggle:hover {
             background-color: var(--hover-color);
-        }
-
-        /* Animation for theme toggle */
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(180deg);
-            }
-        }
-
-        .theme-toggle.animate {
-            animation: rotate 0.5s ease-in-out;
         }
 
         .loading {
@@ -318,11 +304,15 @@
             body.dataset.theme = body.dataset.theme === "dark" ? "light" : "dark";
             localStorage.setItem("theme", body.dataset.theme);
 
-            // Trigger animation
+            // Rotate the theme toggle icon
             const themeToggle = document.querySelector('.theme-toggle');
-            themeToggle.classList.remove('animate'); // Reset animation
-            void themeToggle.offsetWidth; // Trigger reflow
-            themeToggle.classList.add('animate'); // Reapply animation
+            const currentRotation = themeToggle.style.transform
+                ? parseFloat(themeToggle.style.transform.replace('rotate(', '').replace('deg)', ''))
+                : 0;
+
+            // Toggle between 0 and 180 degrees
+            const newRotation = currentRotation === 0 ? 180 : 0;
+            themeToggle.style.transform = `rotate(${newRotation}deg)`;
         }
 
         // Apply saved theme on page load
