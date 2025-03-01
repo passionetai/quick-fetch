@@ -183,7 +183,20 @@
 
         .theme-toggle:hover {
             background-color: var(--hover-color);
-            transform: rotate(180deg);
+        }
+
+        /* Animation for theme toggle */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+
+        .theme-toggle.animate {
+            animation: rotate 0.5s ease-in-out;
         }
 
         .loading {
@@ -304,6 +317,12 @@
             const body = document.body;
             body.dataset.theme = body.dataset.theme === "dark" ? "light" : "dark";
             localStorage.setItem("theme", body.dataset.theme);
+
+            // Trigger animation
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.classList.remove('animate'); // Reset animation
+            void themeToggle.offsetWidth; // Trigger reflow
+            themeToggle.classList.add('animate'); // Reapply animation
         }
 
         // Apply saved theme on page load
